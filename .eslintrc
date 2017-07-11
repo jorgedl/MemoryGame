@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "max-len": ["error", 160],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["gulpfile.babel.js", "gulp-tasks/**/*.js", "**/*.test.js", "**/*.spec.js"]}],
+    "react/no-unknown-property": [2, { "ignore": ["class", "for"] } ],
+    "react/prefer-stateless-function": [2, {"ignorePureComponents": true}],
+    "react/prop-types": [2, {ignore: ["importTypesStore", "uploadsStore"]}],
+    "react/forbid-prop-types": [2, {forbid: ["any", "object"]}],
+    "linebreak-style": 0
+  }
+}

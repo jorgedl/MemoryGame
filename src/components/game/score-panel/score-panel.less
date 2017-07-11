@@ -1,0 +1,21 @@
+@import '../../../style/_variables.less';
+
+.score-panel {
+  flex: 1 1 auto;
+  color: @color-white;
+  padding: @default-padding;
+  background: @color-grey;
+
+  & > .reset-button {
+    display: block;
+    width: 100%;
+    border-radius: 1%;
+    border: none;
+    background: @color-white;
+    color: @color-grey;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}

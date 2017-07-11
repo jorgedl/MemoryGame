@@ -1,0 +1,39 @@
+@import '../../style/_variables.less';
+
+.game {
+  flex: 5 5 auto;
+  padding: 1rem;
+  flex-flow: column;
+  list-style: none;
+  display: flex;
+  flex-flow: row;
+  border-left: solid @color-grey 1px;
+  border-bottom: solid @color-grey 1px;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+
+  & > .game-card {
+
+    &::before {
+      content: '';
+      float: left;
+    }
+
+    border-top: solid @color-grey 1px;
+    border-right: solid @color-grey 1px;
+    flex: 1 0 auto;
+    flex-direction: column;
+    min-width: 22%;
+    max-width: 25%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > i {
+      font-size: 4rem;
+      color: @color-grey;
+    }
+  }
+}
