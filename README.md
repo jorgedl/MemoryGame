@@ -6,4 +6,8 @@ Execute o comando
 
 > npm start
 
-Acesse o endereço [http://localhost:8085/](http://localhost:8085/)
+Após as dependências serem instaladas execute
+
+> npm start
+
+Acesse a aplicação pelo endereço [http://localhost:8085/](http://localhost:8085/)
