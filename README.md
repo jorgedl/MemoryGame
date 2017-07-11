@@ -4,7 +4,7 @@
 
 Execute o comando
 
-> npm start
+> npm install
 
 Após as dependências serem instaladas execute
 
