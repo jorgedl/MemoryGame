@@ -9,6 +9,7 @@ export default class GameStore {
 
   constructor() {
     this.cards = [];
+    this.selectedCards = [];
     this.previousSelect = null;
     this.score = {
       points: 0,
@@ -31,65 +32,62 @@ export default class GameStore {
 
   cardClick(e) {
     const target = e.currentTarget;
-    const selected = {
+    const card = {
       type: target.getAttribute('type'),
       value: target.getAttribute('value'),
       selected: target.getAttribute('data-selected')
     };
-    if (selected.selected === 'true') {
+
+    if (card.selected === 'true' || this.selectedCards.length == 2) {
       return;
     }
-    let previousSelect = this.previousSelect;
-    if (previousSelect) {
-      const correct = selected.value === previousSelect.value;
-      if (correct) {
-        this.selectCard(selected);
-        this.score.points = this.score.points + 1;
-      } else {
-        this.unselectCard();
-      }
-      this.score.attempts = this.score.attempts + 1;
-      previousSelect = null;
-    } else {
-      this.selectCard(selected);
-      previousSelect = {
-        type: target.getAttribute('type'),
-        value: target.getAttribute('value')
-      };
+
+    this.selectCard(card);
+    this.selectedCards.push(card);
+
+    if(this.selectedCards.length < 2){
+      return;
     }
-    this.previousSelect = previousSelect;
+
+    const correct = this.selectedCards[0].value == this.selectedCards[1].value;
+    if (correct) {
+      this.score.points = this.score.points + 1;
+      this.selectedCards = []
+    } else {
+      setTimeout(() => {
+        this.unselectCard(this.selectedCards[0]);
+        this.unselectCard(this.selectedCards[1]);
+        this.selectedCards = []
+      }, 2000);
+    }
+    this.score.attempts = this.score.attempts + 1;
   }
 
-  selectCard(selected) {
+  selectCard(card) {
     this.cards = this.cards.map((c) => {
-      const card = c;
-      card.selected = card.selected || (card.value === selected.value && card.type === selected.type);
-      return card;
+      c.selected = c.selected || (c.value === card.value && c.type === card.type);
+      return c;
     });
   }
 
-  unselectCard() {
-    const previousSelect = this.previousSelect;
+  unselectCard(card) {
     this.cards = this.cards.map((c) => {
-      const card = c;
-      card.selected = !(!card.selected || (card.value === previousSelect.value && card.type === previousSelect.type));
-      return card;
+      c.selected = !(!c.selected || (c.value === card.value && c.type === card.type));
+      return c;
     });
   }
 
   unselectAll() {
     this.cards = this.cards.map((c) => {
-      const card = c;
-      card.selected = false;
-      return card;
+      c.selected = false;
+      return c;
     });
   }
 
   selectAll() {
     this.cards = this.cards.map((c) => {
-      const card = c;
-      card.selected = true;
-      return card;
+      c.selected = true;
+      return c;
     });
   }
 
