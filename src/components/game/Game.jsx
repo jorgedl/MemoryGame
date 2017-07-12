@@ -20,11 +20,8 @@ class Game extends PureComponent {
         { cards.map(card =>
           <GameCard
             key={`${card.value}${card.type}`}
-            selected={card.selected}
-            value={card.value}
             onClick={gameStore.cardClick}
-            icon={card.icon}
-            type={card.type}
+            {...card}
           />) }
       </ul>
     );
